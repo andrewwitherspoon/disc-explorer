@@ -38,10 +38,6 @@ function main() {
     discChart.update();
     throwChart.update();
   });
-
-  new pym.Child({
-    polling: 500
-  });
 }
 
 window.onload = main;

@@ -6,11 +6,6 @@ import "core-js/fn/array/includes";
 import "raf/polyfill";
 import "whatwg-fetch";
 
-// import {
-//   setupVisualsGoogleAnalytics
-// } from "./analytics";
-// setupVisualsGoogleAnalytics();
-
 require.context("../img");
 
 import "../sass/main.scss";

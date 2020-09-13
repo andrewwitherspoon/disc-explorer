@@ -1,11 +1,8 @@
-// const d3 = Object.assign({},
-//     require("d3-selection"),
-//     require("d3-scale"),
-//     require("d3-array"),
-//     require("d3-axis")
-// );
-
-const d3 = require("d3");
+import { scaleLinear } from "d3-scale";
+import { select, selectAll } from "d3-selection";
+import { axisBottom, axisLeft } from "d3-axis";
+import { max, extent } from "d3-array";
+import { forceSimulation, forceCollide, forceX, forceY} from "d3-force";
 
 export default class makeDiscChart {
 
@@ -33,26 +30,26 @@ export default class makeDiscChart {
   }
 
   _setScales() {
-    // this.xScale = d3.scaleLinear()
+    // this.xScale = scaleLinear()
     //   .rangeRound([0, this.width])
     //   .domain([0, 100]);
 
-    this.yScale = d3.scaleLinear()
+    this.yScale = scaleLinear()
       .rangeRound([this.height, 0])
-      .domain(d3.extent(this.data, d=> d.distance));
+      .domain(extent(this.data, d=> d.distance));
 
     var _this = this // To deal with "this" scoping
-    this.simulation = d3.forceSimulation(this.data)
-      .force("x", d3.forceX(this.width / 2))
-      .force("y", d3.forceY(d=> _this.yScale(d.distance)).strength(3))
-      .force("collide", d3.forceCollide().radius(30))
+    this.simulation = forceSimulation(this.data)
+      .force("x", forceX(this.width / 2))
+      .force("y", forceY(d=> _this.yScale(d.distance)).strength(3))
+      .force("collide", forceCollide().radius(30))
       .stop();
 
     for (var i = 0; i < 120; ++i) this.simulation.tick();
   }
 
   appendElements() {
-    this.svg = d3.select(this.element).append("svg");
+    this.svg = select(this.element).append("svg");
 
     this.plot = this.svg.append("g").attr("class", "chart-g");
 
@@ -75,14 +72,14 @@ export default class makeDiscChart {
     // this.xAxis
     //   .attr("transform", "translate(0," + (this.height + 20) + ")")
     //   .call(
-    //     d3.axisBottom(this.xScale)
+    //     axisBottom(this.xScale)
     //     .tickSize(-this.height - 20)
     //   );
 
     this.yAxis
       .attr("transform", `translate(-20,0)`)
       .call(
-        d3.axisLeft(this.yScale)
+        axisLeft(this.yScale)
         .tickSize(-this.width - 20)
       );
 

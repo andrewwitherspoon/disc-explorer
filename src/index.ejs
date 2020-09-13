@@ -8,15 +8,24 @@
     <meta property="slug" content="<%= htmlWebpackPlugin.options.project.slug %>" />
     <title><%= htmlWebpackPlugin.options.title %></title>
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Domine:400,700"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600"/>
-
   </head>
   <body>
-    <div class="chart-container">
-      <h2 class="headline">Disc explorer</h2>
-      <div class="chart"></div>
+    <div class="page-container">
+      <div class="top-bar">
+        <h1 class="headline">Disc explorer</h2>
+        <button id="discs-button" class="nav-item">Discs</button>
+        <button id="throws-button" class="nav-item">Throws</button>
+      </div>
+      <div id="discs-view" class="view-container">
+        <div class="filter-container">
+        </div>
+        <div class="chart"></div>
+      </div>
+      <div id="throws-view" class="view-container">
+        <div class="filter-container">
+        </div>
+        <div class="chart"></div>
+      </div>
     </div>
   </body>
 

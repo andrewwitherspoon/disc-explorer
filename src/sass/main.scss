@@ -1,5 +1,12 @@
-@import '_basics';
-@import '_reset';
+@import "_basics";
+@import "_reset";
+@import "discs";
+@import "throws";
+
+///////////////////////////////////////////////////////////////////////
+// Global styles
+///////////////////////////////////////////////////////////////////////
+$color-text: #222222;
 
 html,
 body {
@@ -10,38 +17,38 @@ body {
   height: auto;
 }
 
-.chart-container {
+.page-container {
   width: 100%;
   text-align: left;
   max-width: 900px;
   margin: 0 auto;
+}
 
-  .chart {
-    display: inline-block;
-    height: 500px;
-    width: 100%;
+.chart {
+  display: inline-block;
+  height: 500px;
+  width: 100%;
 
-    .axis {
-      text {
-        font-family: $sans;
-        fill: $color-gray-03;
-        pointer-events: none;
-      }
+  .axis {
+    text {
+      font-family: $sans;
+      fill: $color-gray-300;
+      pointer-events: none;
+    }
 
-      .tick text {
-        font-size: 12px;
-      }
+    .tick text {
+      font-size: 12px;
+    }
 
-      line,
-      path {
-        stroke: $color-gray-03;
-        stroke-width: 0.5;
-        pointer-events: none;
-      }
+    line,
+    path {
+      stroke: $color-gray-300;
+      stroke-width: 0.5;
+      pointer-events: none;
+    }
 
-      .domain {
-        display: none;
-      }
+    .domain {
+      display: none;
     }
   }
 }
@@ -51,7 +58,7 @@ body {
   font-size: 20px;
   line-height: 25px;
   font-weight: 600;
-  color: $color-gray-05;
+  color: $color-text;
   margin-bottom: 10px;
 }
 
@@ -59,7 +66,7 @@ body {
   font-family: $sans;
   font-size: 16px;
   line-height: 24px;
-  color: $color-gray-03;
+  color: $color-gray-300;
   font-weight: 400;
 }
 
@@ -69,7 +76,7 @@ body {
   line-height: 16px;
   font-weight: 500;
   letter-spacing: 1.1px;
-  color: $color-gray-05;
+  color: $color-text;
   text-transform: uppercase;
   margin-bottom: 8px;
 }
@@ -78,14 +85,14 @@ body {
   font-family: $sans;
   font-size: 14px;
   line-height: 20px;
-  color: $color-gray-05;
+  color: $color-text;
 }
 
 .annotation {
   font-family: $sans;
   font-size: 14px;
   line-height: 22px;
-  color: $color-gray-05;
+  color: $color-text;
 }
 
 .annotation--bold {
@@ -93,12 +100,12 @@ body {
   font-weight: 500;
   font-size: 14px;
   line-height: 22px;
-  color: $color-gray-05;
+  color: $color-text;
 }
 
 .annotation--number {
   font-family: $sans;
   font-size: 16px;
   line-height: 22px;
-  color: $color-gray-05;
+  color: $color-text;
 }

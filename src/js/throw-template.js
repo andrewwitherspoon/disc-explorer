@@ -7,7 +7,7 @@
 
 const d3 = require("d3");
 
-export default class makeChart {
+export default class makeThrowChart {
 
   constructor(opts) {
     Object.assign(this, opts);
@@ -33,22 +33,13 @@ export default class makeChart {
   }
 
   _setScales() {
-    // this.xScale = d3.scaleLinear()
-    //   .rangeRound([0, this.width])
-    //   .domain([0, 100]);
+    this.xScale = d3.scaleLinear()
+      .rangeRound([0, this.width])
+      .domain([0, 100]);
 
     this.yScale = d3.scaleLinear()
       .rangeRound([this.height, 0])
-      .domain(d3.extent(this.data, d=> d.distance));
-
-    var _this = this // To deal with "this" scoping
-    this.simulation = d3.forceSimulation(this.data)
-      .force("x", d3.forceX(this.width / 2))
-      .force("y", d3.forceY(d=> _this.yScale(d.distance)).strength(3))
-      .force("collide", d3.forceCollide().radius(30))
-      .stop();
-
-    for (var i = 0; i < 120; ++i) this.simulation.tick();
+      .domain([0, 100]);
   }
 
   appendElements() {
@@ -56,14 +47,8 @@ export default class makeChart {
 
     this.plot = this.svg.append("g").attr("class", "chart-g");
 
-    // this.xAxis = this.plot.append("g").classed("axis x-axis", true);
+    this.xAxis = this.plot.append("g").classed("axis x-axis", true);
     this.yAxis = this.plot.append("g").classed("axis y-axis", true);
-
-    this.discs = this.plot.selectAll(".disc")
-      .data(this.data)
-      .enter()
-      .append("image")
-      .attr("class", d=> `${d.id} disc`)
   }
 
   render() {
@@ -72,12 +57,12 @@ export default class makeChart {
 
     this.plot.attr("transform", `translate(${this.margin.left},${this.margin.top})`);
 
-    // this.xAxis
-    //   .attr("transform", "translate(0," + (this.height + 20) + ")")
-    //   .call(
-    //     d3.axisBottom(this.xScale)
-    //     .tickSize(-this.height - 20)
-    //   );
+    this.xAxis
+      .attr("transform", "translate(0," + (this.height + 20) + ")")
+      .call(
+        d3.axisBottom(this.xScale)
+        .tickSize(-this.height - 20)
+      );
 
     this.yAxis
       .attr("transform", `translate(-20,0)`)
@@ -85,13 +70,6 @@ export default class makeChart {
         d3.axisLeft(this.yScale)
         .tickSize(-this.width - 20)
       );
-
-    this.discs
-      .attr("href", d=> `./img/${d.id}.png`)
-      .attr("x", d=> d.x)
-      .attr("y", d=> d.y)
-      .attr("height", "50px")
-      .attr("width", "50px")
   }
 
 }
